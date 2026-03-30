@@ -16,6 +16,46 @@ const description = 'Ce masina de spalat sa cumpar in 2026? Am comparat 21 de ma
   <Nav />
   <Hero />
 
+  <!-- ===== TOP 3 ===== -->
+  <section id="top-masini">
+    <div class="wrap">
+      <div class="sec-head sec-head--center">
+        <span class="sec-head__eyebrow">Top 3 recomandate</span>
+        <h2>Cele mai bune masini de spalat ieftine in 2026</h2>
+        <p>Daca nu ai timp sa citesti toate cele 21 de recenzii, acestea sunt cele 3 masini de spalat pe care le recomandam in functie de buget.</p>
+      </div>
+      <div class="top3">
+        <a href={`#recenzie-${products.ieftine[0].name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '')}`} class="top3__card">
+          <span class="top3__rank">1</span>
+          <img src={`/assets/images/products/${products.ieftine[0].slug}.webp`} alt={products.ieftine[0].name} width="120" height="120" loading="lazy" />
+          <div class="top3__info">
+            <span class="top3__cat">Cel mai bun pret</span>
+            <span class="top3__name">{products.ieftine[0].name}</span>
+            <span class="top3__why">Motor inverter, clasa A, abur. Sub 1.500 RON.</span>
+          </div>
+        </a>
+        <a href={`#recenzie-${products.buget[0].name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '')}`} class="top3__card">
+          <span class="top3__rank">2</span>
+          <img src={`/assets/images/products/${products.buget[0].slug}.webp`} alt={products.buget[0].name} width="120" height="120" loading="lazy" />
+          <div class="top3__info">
+            <span class="top3__cat">Raport calitate-pret</span>
+            <span class="top3__name">{products.buget[0].name}</span>
+            <span class="top3__why">Slim, 8 kg, inverter, clasa A. Sub 2.000 RON.</span>
+          </div>
+        </a>
+        <a href={`#recenzie-${products.buget[3].name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '')}`} class="top3__card">
+          <span class="top3__rank">3</span>
+          <img src={`/assets/images/products/${products.buget[3].slug}.webp`} alt={products.buget[3].name} width="120" height="120" loading="lazy" />
+          <div class="top3__info">
+            <span class="top3__cat">Cea mai buna cu uscator</span>
+            <span class="top3__name">{products.buget[3].name}</span>
+            <span class="top3__why">10 kg spalare, 6 kg uscare, Wi-Fi, clasa A.</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== MASINI IEFTINE ===== -->
   {products.ieftine?.length > 0 && (
   <section id="ieftine" class="fade-up">

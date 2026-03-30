@@ -10,6 +10,7 @@ let redirects = '';
 
 for (const p of all) {
   if (p.affiliate && p.slug) {
+    redirects += `/out/${p.slug}/ ${p.affiliate} 302\n`;
     redirects += `/out/${p.slug} ${p.affiliate} 302\n`;
   }
 }
