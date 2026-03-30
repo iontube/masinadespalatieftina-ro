@@ -207,6 +207,8 @@ section{padding:var(--space-2xl) 0}
 .card__cta{display:block;width:100%;padding:.65rem;background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;text-align:center;border-radius:var(--r-md);font-weight:700;font-size:.8rem;transition:all .25s;letter-spacing:.01em;box-shadow:0 3px 10px rgba(192,88,58,.2)}
 @media(min-width:768px){.card__cta{padding:.75rem;font-size:.85rem}}
 .card__cta:hover{box-shadow:0 5px 18px rgba(192,88,58,.35);transform:translateY(-2px);color:#fff}
+.card__review-link{display:block;text-align:center;padding:.55rem;font-size:.75rem;font-weight:600;color:var(--ink-mid);border:1px solid var(--surface-muted);border-radius:var(--r-md);margin-top:.5rem;transition:all .2s}
+.card__review-link:hover{color:var(--accent);border-color:var(--accent-light);background:var(--accent-glow)}
 
 /* ===== REVIEWS — Alternating editorial layout ===== */
 .review{background:var(--surface);border-radius:var(--r-md);border:1px solid var(--surface-muted);padding:1rem;margin-bottom:1rem}

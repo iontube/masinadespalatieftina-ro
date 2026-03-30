@@ -11,6 +11,7 @@ interface Props {
 }
 const { name, slug, image, affiliate, specs, summary, badge, badgeType = 'top' } = Astro.props;
 const imgSrc = image || `/assets/images/products/${slug}.webp`;
+const reviewId = 'recenzie-' + name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/,'');
 ---
 <article class="card">
   {badge && <span class={`card__badge card__badge--${badgeType}`}>{badge}</span>}
@@ -27,6 +28,7 @@ const imgSrc = image || `/assets/images/products/${slug}.webp`;
     {summary && <p class="card__summary">{summary}</p>}
     <div class="card__foot">
       <a href={`/out/${slug}/`} class="card__cta" rel="nofollow sponsored noopener" target="_blank">Vezi Oferta</a>
+      <a href={`#${reviewId}`} class="card__review-link">Citeste recenzia &darr;</a>
     </div>
   </div>
 </article>
