@@ -1,0 +1,389 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import ProductCard from '../components/ProductCard.astro';
+import ProductReview from '../components/ProductReview.astro';
+import Footer from '../components/Footer.astro';
+import SchemaMarkup from '../components/SchemaMarkup.astro';
+import products from '../data/products.json';
+
+const title = 'Masina de spalat ieftina si buna 2026: 21 modele comparate si testate';
+const description = 'Ce masina de spalat sa cumpar in 2026? Am comparat 21 de masini de spalat rufe ieftine, de buget si premium. Arctic, Beko, Samsung, LG si Whirlpool cu motor inverter, clasa A si spalare cu aburi, de la 1.000 RON.';
+---
+<Layout title={title} description={description}>
+  <SchemaMarkup />
+  <Nav />
+  <Hero />
+
+  <!-- ===== MASINI IEFTINE ===== -->
+  {products.ieftine?.length > 0 && (
+  <section id="ieftine" class="fade-up">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="sec-head__eyebrow">1.000 – 1.500 RON</span>
+        <h2>Masini de spalat ieftine</h2>
+        <p>Am selectat cele mai bune masini de spalat ieftine si bune din Romania intre 1.000 si 1.500 RON. Modele cu motor inverter, clasa energetica A si spalare cu aburi de la Arctic, Beko, Heinner si TCL. Fiecare testata pe specificatii reale, consum electric si disponibilitate service in Romania.</p>
+      </div>
+      <div class="products">
+        {products.ieftine.map((p, i) => (
+          <ProductCard
+            name={p.name}
+            slug={p.slug}
+            affiliate={p.affiliate}
+            specs={p.specs}
+            summary={p.summary}
+            badge={i === 0 ? 'Cel mai ieftin' : undefined}
+            badgeType="cheap"
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+  )}
+
+  <!-- ===== REVIEW-URI IEFTINE ===== -->
+  {products.ieftine?.length > 0 && (
+  <section style="background:var(--surface-dim)">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="sec-head__eyebrow">Analize detaliate</span>
+        <h2>Recenzie detaliata pentru fiecare masina de spalat ieftina</h2>
+      </div>
+      {products.ieftine.map(p => (
+        <ProductReview
+          name={p.name}
+          slug={p.slug}
+          affiliate={p.affiliate}
+          specs={p.specs}
+          review={p.review}
+        />
+      ))}
+    </div>
+  </section>
+  )}
+
+  <!-- ===== MASINI BUGET ===== -->
+  {products.buget?.length > 0 && (
+  <section id="buget" style="background:var(--surface-dim)" class="fade-up">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="sec-head__eyebrow">Raport calitate-pret</span>
+        <h2>Masini de spalat de buget</h2>
+        <p>Masini de spalat rufe cu cel mai bun raport calitate-pret din Romania intre 1.500 si 2.500 RON. Aici gasesti modele cu motor inverter, masini de spalat slim pentru spatii mici, masini de spalat cu uscator accesibile si optiuni Samsung, Beko, Whirlpool si TCL cu clasa A si functii ca SteamCure, FreshCare+ si Hygiene Steam.</p>
+      </div>
+      <div class="products">
+        {products.buget.map((p, i) => (
+          <ProductCard
+            name={p.name}
+            slug={p.slug}
+            affiliate={p.affiliate}
+            specs={p.specs}
+            summary={p.summary}
+            badge={i === 0 ? 'Best Value' : undefined}
+            badgeType="value"
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+  )}
+
+  <!-- ===== REVIEW-URI BUGET ===== -->
+  {products.buget?.length > 0 && (
+  <section>
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="sec-head__eyebrow">Analize detaliate</span>
+        <h2>Recenzie detaliata pentru fiecare masina de spalat de buget</h2>
+      </div>
+      {products.buget.map(p => (
+        <ProductReview
+          name={p.name}
+          slug={p.slug}
+          affiliate={p.affiliate}
+          specs={p.specs}
+          review={p.review}
+        />
+      ))}
+    </div>
+  </section>
+  )}
+
+  <!-- ===== MASINI PREMIUM ===== -->
+  {products.premium?.length > 0 && (
+  <section id="premium" class="fade-up">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="sec-head__eyebrow">Cele mai bune</span>
+        <h2>Masini de spalat premium</h2>
+        <p>Cele mai bune masini de spalat din 2026 pentru cine vrea consum minim, durabilitate maxima si functii avansate. Masini de spalat cu uscator de la Samsung, LG, Electrolux si AEG, plus calitate germana Bosch si Miele cu motor inverter, conectivitate Wi-Fi, dozare automata detergent si clase energetice de top.</p>
+      </div>
+      <div class="products">
+        {products.premium.map((p, i) => (
+          <ProductCard
+            name={p.name}
+            slug={p.slug}
+            affiliate={p.affiliate}
+            specs={p.specs}
+            summary={p.summary}
+            badge={i === 0 ? 'Top alegere' : undefined}
+            badgeType="top"
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+  )}
+
+  <!-- ===== REVIEW-URI PREMIUM ===== -->
+  {products.premium?.length > 0 && (
+  <section style="background:var(--surface-dim)">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="sec-head__eyebrow">Analize detaliate</span>
+        <h2>Recenzie detaliata pentru fiecare masina de spalat premium</h2>
+      </div>
+      {products.premium.map(p => (
+        <ProductReview
+          name={p.name}
+          slug={p.slug}
+          affiliate={p.affiliate}
+          specs={p.specs}
+          review={p.review}
+        />
+      ))}
+    </div>
+  </section>
+  )}
+
+  <!-- ===== GHID ===== -->
+  <section id="ghid" style="background:var(--surface-dim)">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="sec-head__eyebrow">Ghid complet 2026</span>
+        <h2>Cum alegi cea mai buna masina de spalat ieftina fara sa dai gres</h2>
+      </div>
+      <div class="guide">
+        <img src="/assets/images/cum-alegi-cea-mai-buna-masina-de-spalat-ieftina-ghid-complet-2026.webp" alt="Cum alegi cea mai buna masina de spalat ieftina in 2026 - ghid complet cu sfaturi practice" width="1200" height="600" loading="lazy" style="border-radius:var(--r-md);margin-bottom:var(--space-xl);width:100%;height:auto" />
+
+        <p>Iti trebuie o masina de spalat noua si nu vrei sa arunci banii pe ceva care se strica in doi ani. Problema e ca daca intri pe eMAG, Altex sau Dedeman gasesti sute de modele si fiecare pare la fel de buna pe hartie. Specificatiile sunt pline de termeni tehnici, preturile variaza de la 700 la 7.000 de lei si nu e clar ce conteaza si ce nu.</p>
+        <p>Am trecut prin zeci de masini de spalat rufe disponibile in Romania in 2026 si le-am comparat pe bune. In ghidul de mai jos iti explicam exact la ce sa te uiti, ce sa ignori si unde e diferenta reala intre o masina ieftina si buna si una ieftina si proasta.</p>
+
+        <h3>Ce capacitate are nevoie masina ta de spalat?</h3>
+        <img src="/assets/images/ce-capacitate-are-nevoie-masina-de-spalat-7-kg-vs-8-kg.webp" alt="Ce capacitate are nevoie masina ta de spalat - comparatie 7 kg vs 8 kg rufe uscate" width="1200" height="600" loading="lazy" style="border-radius:var(--r-md);margin-bottom:var(--space-lg);width:100%;height:auto" />
+        <p>Capacitatea se masoara in kilograme de rufe uscate. O masina de spalat 7 kg ia cam 35 de tricouri sau doua seturi complete de lenjerie de pat. O masina de spalat 8 kg ia cu 5-6 tricouri mai mult, pare putin, dar face diferenta cand bagi prosoape sau o pilota.</p>
+        <p>Regula e simpla: daca stai singur sau cu partenerul, o masina de spalat de 6-7 kg e suficienta. Daca ai copii, ia minimum o masina de spalat 8 kg. Familiile mari care spala des lenjerii voluminoase au nevoie de o masina de spalat 9 kg sau chiar o masina de spalat cu capacitate mare de 10 kg.</p>
+        <p>Un lucru pe care multi il ignora: o masina de spalat cu capacitate mica consumata la incarcare plina consuma mai putin per kilogram de rufe decat una mare pe jumatate goala. Nu cumpara o masina de 10 kg daca de obicei speli 4 kg de rufe. Modelele noi au senzori care ajusteaza consumul de apa in functie de incarcare, dar fizica nu minte: un tambur mai mare inseamna mai multa apa necesara oricum.</p>
+
+        <h3>Viteza de centrifugare: 1000, 1200 sau 1400 RPM?</h3>
+        <p>RPM-ul (rotatii pe minut) determina cat de uscate ies rufele dupa centrifugare. La 1000 RPM rufele raman destul de umede si au nevoie de 4-6 ore sa se usuce pe sarma. La 1200 RPM ies acceptabil.2-3 ore de uscare. La 1400 RPM sunt aproape uscate si in 1-2 ore le poti impaturi.</p>
+        <p>Exista masini de spalat cu 1600 RPM si chiar 1800 RPM, dar aceste viteze sunt relevante doar la masini premium si masini de spalat cu uscator unde centrifugarea rapida reduce consumul la uscare. Pentru o masina de spalat ieftina, o masina de spalat 1200 RPM sau o masina de spalat 1400 RPM este tot ce ai nevoie.</p>
+        <p>Un aspect pe care producatorii il mentioneaza rar: la centrifugare mare, hainele se sifoneaza mai tare. Daca urasti calcatul, 1200 RPM e un compromis bun intre rufe uscate si rufe fara prea multe cute.</p>
+
+        <h3>Clasa energetica: cat consuma masina de spalat si de ce conteaza</h3>
+        <img src="/assets/images/cat-consuma-masina-de-spalat-clasa-energetica-a-vs-clasa-c.webp" alt="Cat consuma o masina de spalat - diferenta intre clasa energetica A si clasa C la factura de curent" width="1200" height="600" loading="lazy" style="border-radius:var(--r-md);margin-bottom:var(--space-lg);width:100%;height:auto" />
+        <p>Din 2021 exista un nou sistem de etichetare energetica in UE. O masina de spalat clasa A este cea mai eficienta, iar clasa G cea mai putin eficienta. Majoritatea masinilor de spalat ieftine sunt clasa B, C sau D. O masina de spalat clasa A la pret mic este rara, cand gasesti una, merita luata.</p>
+        <p>Cat consuma masina de spalat concret? O masina clasa A consuma in jur de 45-55 kWh pe an la utilizare normala (3-4 spalari pe saptamana). O masina clasa C ajunge la 70-80 kWh, iar una clasa D la 85-100 kWh. Diferenta reala la factura de curent e de 40-70 RON pe an intre clasa A si clasa D. Nu pare mult, dar pe 10 ani inseamna 400-700 RON economisiti, bani cu care poti lua o masina ceva mai buna de la inceput.</p>
+        <p>Consumul de apa conteaza si el, mai ales daca ai contor de apa. O masina de spalat cu consum mic de apa foloseste 40-50 de litri per ciclu. Una cu consum mare ajunge la 60-70 de litri. Modelele cu senzori de greutate ajusteaza apa automat si chiar fac economie reala.</p>
+
+        <h3>Motor inverter sau motor clasic: ce e si de ce conteaza</h3>
+        <p>Motorul clasic (cu perii de carbon) este cel mai ieftin de produs dar are doua probleme: face zgomot si se uzeaza. Periile de carbon trebuie inlocuite la 5-7 ani, iar vibratiilele la centrifugare sunt notabile. Un motor inverter nu are perii, functioneaza electromagnetic, este semnificativ mai silentios, consuma mai putin si dureaza mai mult.</p>
+        <p>In 2026 poti gasi o masina de spalat cu motor inverter chiar si in segmentul ieftin. Arctic, Beko si TCL ofera modele cu inverter sub 1.500 lei. Diferenta de pret fata de un motor clasic e de 100-200 lei, dar pe termen lung economisesti la curent si la reparatii. Daca gasesti o masina de spalat inverter la bugetul tau, ia-o fara ezitare.</p>
+        <p>Exista si motorul inverter Direct Drive (folosit de LG) care e montat direct pe tambur fara curea de transmisie. Teoretic e si mai durabil si mai silentios, dar se gaseste doar la masini mai scumpe.</p>
+
+        <h3>Masina de spalat cu uscator: merita sau nu?</h3>
+        <img src="/assets/images/masina-de-spalat-cu-uscator-slim-in-apartament-mic.webp" alt="Masina de spalat cu uscator slim instalata intr-un apartament mic - economie de spatiu" width="1200" height="600" loading="lazy" style="border-radius:var(--r-md);margin-bottom:var(--space-lg);width:100%;height:auto" />
+        <p>O masina de spalat cu uscator combina doua aparate intr-unul singur. Avantajul e ca economisesti spatiu: nu ai nevoie de doua aparate separate si nici de loc pentru un uscator dedicat. Daca stai intr-un apartament fara balcon sau cu spatiu limitat, o masina de spalat cu uscator slim rezolva problema complet.</p>
+        <p>Dezavantajele sunt reale: capacitatea de uscare e intotdeauna mai mica decat cea de spalare (de obicei jumatate), uscarea prin condensare consuma mai multa energie decat spalarea, iar ciclul complet de spalare plus uscare dureaza 3-5 ore. O masina de spalat cu uscator Samsung, o masina de spalat cu uscator LG sau o masina de spalat cu uscator Beko sunt optiunile cele mai populare in Romania, fiecare cu plusuri si minusuri specifice.</p>
+        <p>Sfatul nostru: daca ai unde intinde rufele si nu te grabesti, o masina normala de spalat e mai eficienta si mai ieftina. Daca nu ai unde usca deloc sau ai nevoie de rufe uscate in aceeasi zi, masina cu uscator isi merita banii.</p>
+
+        <h3>Masina de spalat slim: cand merita si cand nu</h3>
+        <p>O masina de spalat slim are o adancime de 40-48 cm fata de 55-65 cm la una standard. Incape in spatii unde o masina normala nu ar intra: bai mici, nise de mobilier sau sub blatul de la bucatarie. Heinner, Samsung si Beko au masini slim cu specificatii comparabile cu modelele full-size.</p>
+        <p>Compromisul: capacitatea e de obicei cu 1-2 kg mai mica, tamburul e mai ingust si uneori rezultatele la spalare sunt putin sub modelele standard. Daca ai spatiu suficient, ia o masina normala. Daca nu, o masina de spalat slim cu motor inverter si clasa A este un compromis excelent.</p>
+
+        <h3>Spalare cu aburi: functie de marketing sau utilitate reala?</h3>
+        <p>Functia de spalare la abur sau masina de spalat cu aburi exista sub mai multe nume: SteamCure la Beko, ExtraSteam la Arctic, Hygiene Steam la Samsung, Steam Refresh la Whirlpool. Toate fac acelasi lucru, injecteaza abur in tambur fie in timpul spalarii, fie dupa.</p>
+        <p>Aburul la temperatura inalta elimina pana la 99.9% din bacterii si alergeni. Este util daca ai copii mici, persoane cu alergii in casa sau pur si simplu vrei haine mai igienizate. De asemenea, aburul reduce cutele si improspataza hainele fara un ciclu complet de spalare.</p>
+        <p>E o functie utila, nu doar marketing. Vestea buna e ca in 2026 gasesti masini de spalat cu aburi chiar si in segmentul ieftin.Arctic si TCL ofera abur sub 1.500 lei.</p>
+
+        <h3>Ce masina de spalat sa cumpar: Samsung, LG, Beko, Arctic sau Whirlpool?</h3>
+        <p>Fiecare brand are puncte forte diferite in Romania:</p>
+        <ul>
+          <li><strong>Samsung</strong>: cel mai bun service autorizat din Romania, centre in toate orasele mari, piese originale disponibile rapid. Masina de spalat Samsung e alegerea sigura daca service-ul e prioritatea ta.</li>
+          <li><strong>LG</strong>: motor Direct Drive cu 10 ani garantie, SmartDiagnosis pentru depanare de la distanta. Masina de spalat LG este recunoscuta pentru durabilitate.</li>
+          <li><strong>Beko</strong>: cel mai bun raport specificatii-pret din piata romaneasca. Fabricat in Turcia cu retea de service extinsa. Masina de spalat Beko ofera functii premium la pret de buget.</li>
+          <li><strong>Arctic</strong>: brand romanesc cu fabrici locale si cea mai accesibila retea de service din tara. Masina de spalat Arctic e alegerea pragmatica, face tot ce trebuie fara sa te taxeze.</li>
+          <li><strong>Whirlpool</strong>.FreshCare+ e o functie unica pe care niciun alt brand nu o ofera. Masina de spalat Whirlpool e pentru cine uita mereu rufele in masina.</li>
+          <li><strong>Bosch si Miele</strong>: calitate germana premium, consum minim, durabilitate maxima. Masina de spalat Bosch sau Miele este o investitie pe 15-20 de ani.</li>
+        </ul>
+
+        <h3>Cand e cel mai bun moment sa cumperi o masina de spalat?</h3>
+        <p>Preturile la masini de spalat variaza cu 15-25% de-a lungul anului. Cele mai bune perioade pentru achizitie sunt Black Friday (noiembrie), reducerile de vara (iulie-august) si perioadele de lichidare de stoc cand apare o generatie noua. O masina de spalat ieftina si buna se gaseste mai usor in aceste perioade.</p>
+        <p>Compara preturile intre eMAG, Altex, Dedeman si Flanco inainte sa comanzi. Acelasi model poate avea diferente de 100-300 lei intre magazine. Nu te uita doar la pretul barat, compara pretul actual cu alte magazine, nu cu pretul barat de pe acelasi site.</p>
+
+        <h3>Instalare si intretinere: ce trebuie sa stii dupa achizitie</h3>
+        <img src="/assets/images/intretinere-masina-de-spalat-rufe-curatare-filtru-tambur.webp" alt="Intretinere masina de spalat rufe - cum cureti filtrul de scame si tamburul pentru o durata de viata mai lunga" width="1200" height="600" loading="lazy" style="border-radius:var(--r-md);margin-bottom:var(--space-lg);width:100%;height:auto" />
+        <p>Dupa ce primesti masina, asigura-te ca e nivelata corect pe podea. O masina nenivelata vibratii la centrifugare, face zgomot si se uzeaza prematur. Foloseste un boloboc sau aplicatia de nivel de pe telefon. Scoate suruburile de transport din spate, toate masinile noi vin cu ele si daca le lasi, poti distruge tamburul.</p>
+        <p>La intretinere: curata filtrul de scame o data pe luna, lasa usa deschisa dupa fiecare spalare ca sa se usuce interiorul (previne mucegaiul), si ruleaza un program de curatare la 90 de grade fara rufe o data pe luna. Foloseste detergent lichid in loc de pudra daca ai o masina cu dozare automata sau daca vrei sa eviti reziduurile.</p>
+        <p>O masina de spalat intretinuta corect dureaza 10-15 ani fara probleme majore. Una neglijata poate incepe sa faca probleme dupa 3-4 ani: miros de mucegai, filtru infundat, garnitura deteriorata.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TABEL COMPARATIV ===== -->
+  <section id="comparatie">
+    <div class="wrap">
+      <div class="sec-head sec-head--center">
+        <span class="sec-head__eyebrow">Comparatie directa</span>
+        <h2>Toate cele 21 de masini de spalat, comparate</h2>
+      </div>
+
+      <h3 style="margin-bottom:var(--space-md)">Masini de spalat ieftine (1.000 – 1.500 RON)</h3>
+      <div class="comp-wrap">
+        <table class="comp-table">
+          <thead>
+            <tr><th>Model</th><th>Capacitate</th><th>RPM</th><th>Clasa</th><th>Motor</th><th>Abur</th><th>Oferta</th></tr>
+          </thead>
+          <tbody>
+            {products.ieftine.map(p => (
+              <tr>
+                <td>{p.name.replace('Masina de spalat rufe ', '').replace('Slim ', '')}</td>
+                <td>{p.specs.capacitate}</td>
+                <td>{p.specs.rpm}</td>
+                <td>{p.specs.clasa}</td>
+                <td>{p.specs.tip.includes('Inverter') || p.specs.tip.includes('inverter') ? 'Inverter' : 'Clasic'}</td>
+                <td>{p.specs.tip.includes('Steam') || p.specs.tip.includes('abur') || p.specs.tip.includes('SteamCure') || p.specs.tip.includes('ExtraSteam') ? 'Da' : 'Nu'}</td>
+                <td><a href={`/out/${p.slug}/`} class="tbl-cta" rel="nofollow sponsored noopener" target="_blank">Vezi pret</a></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="margin:var(--space-xl) 0 var(--space-md)">Masini de spalat de buget (1.500 – 2.500 RON)</h3>
+      <div class="comp-wrap">
+        <table class="comp-table">
+          <thead>
+            <tr><th>Model</th><th>Capacitate</th><th>RPM</th><th>Clasa</th><th>Motor</th><th>Abur</th><th>Oferta</th></tr>
+          </thead>
+          <tbody>
+            {products.buget.map(p => (
+              <tr>
+                <td>{p.name.replace('Masina de spalat rufe ', '').replace('slim ', '').replace('cu uscator ', '')}</td>
+                <td>{p.specs.capacitate}</td>
+                <td>{p.specs.rpm}</td>
+                <td>{p.specs.clasa}</td>
+                <td>{p.specs.tip.includes('Inverter') || p.specs.tip.includes('inverter') ? 'Inverter' : 'Clasic'}</td>
+                <td>{p.specs.tip.includes('Steam') || p.specs.tip.includes('abur') || p.specs.tip.includes('SteamCure') || p.specs.tip.includes('FreshCare') || p.specs.tip.includes('Hygiene') ? 'Da' : 'Nu'}</td>
+                <td><a href={`/out/${p.slug}/`} class="tbl-cta" rel="nofollow sponsored noopener" target="_blank">Vezi pret</a></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="margin:var(--space-xl) 0 var(--space-md)">Masini de spalat premium</h3>
+      <div class="comp-wrap">
+        <table class="comp-table">
+          <thead>
+            <tr><th>Model</th><th>Capacitate</th><th>RPM</th><th>Clasa</th><th>Tip</th><th>Oferta</th></tr>
+          </thead>
+          <tbody>
+            {products.premium.map(p => (
+              <tr>
+                <td>{p.name.replace('Masina de spalat rufe ', '').replace('cu uscator ', '')}</td>
+                <td>{p.specs.capacitate}</td>
+                <td>{p.specs.rpm}</td>
+                <td>{p.specs.clasa}</td>
+                <td>{p.specs.tip}</td>
+                <td><a href={`/out/${p.slug}/`} class="tbl-cta" rel="nofollow sponsored noopener" target="_blank">Vezi pret</a></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section id="faq" class="fade-up">
+    <div class="wrap">
+      <div class="sec-head sec-head--center">
+        <span class="sec-head__eyebrow">Intrebari frecvente</span>
+        <h2>Ce trebuie sa stii inainte sa cumperi</h2>
+      </div>
+      <div class="faq-grid">
+        <div class="faq-card">
+          <button class="faq-card__q" aria-expanded="false">Care este cea mai buna masina de spalat ieftina in 2026?<span class="faq-card__icon">&#9660;</span></button>
+          <div class="faq-card__a">Depinde de buget si nevoi. Pentru majoritatea familiilor, o masina de spalat cu capacitate de 7-8 kg, clasa energetica A si 1200 rpm ofera cel mai bun raport calitate-pret.</div>
+        </div>
+        <div class="faq-card">
+          <button class="faq-card__q" aria-expanded="false">Cat consuma o masina de spalat?<span class="faq-card__icon">&#9660;</span></button>
+          <div class="faq-card__a">O masina moderna cu clasa energetica A consuma intre 40-60 kWh pe an la utilizare normala. Diferenta fata de una veche poate fi de 100-200 RON pe an la factura de curent.</div>
+        </div>
+        <div class="faq-card">
+          <button class="faq-card__q" aria-expanded="false">Merita o masina de spalat cu uscator?<span class="faq-card__icon">&#9660;</span></button>
+          <div class="faq-card__a">Daca ai spatiu limitat si nu ai unde usca rufele, da. Modelele 2-in-1 sunt mai scumpe dar economisesc spatiu. Uscarea consuma mai multa energie decat spalarea.</div>
+        </div>
+        <div class="faq-card">
+          <button class="faq-card__q" aria-expanded="false">Cat de importanta este viteza de centrifugare?<span class="faq-card__icon">&#9660;</span></button>
+          <div class="faq-card__a">1200 rpm este suficient pentru majoritatea hainelor. 1400 rpm scoate rufele mai uscate dar este mai zgomotos si consuma mai mult. Sub 1000 rpm nu recomandam.</div>
+        </div>
+        <div class="faq-card">
+          <button class="faq-card__q" aria-expanded="false">Ce capacitate am nevoie?<span class="faq-card__icon">&#9660;</span></button>
+          <div class="faq-card__a">Pentru 1-2 persoane: 6-7 kg. Familie cu 2-3 copii: 8-9 kg. Familie mare sau lenjerii voluminoase: 10+ kg.</div>
+        </div>
+        <div class="faq-card">
+          <button class="faq-card__q" aria-expanded="false">Samsung, LG sau Beko – ce brand sa aleg?<span class="faq-card__icon">&#9660;</span></button>
+          <div class="faq-card__a">Samsung si LG au cel mai bun service in Romania. Beko si Arctic ofera cel mai bun pret la specificatii similare. Toate sunt fiabile pentru utilizare normala.</div>
+        </div>
+        <div class="faq-card">
+          <button class="faq-card__q" aria-expanded="false">Cat dureaza o masina de spalat?<span class="faq-card__icon">&#9660;</span></button>
+          <div class="faq-card__a">O masina de spalat de calitate medie dureaza 8-12 ani. Modelele premium pot tine 15+ ani cu intretinere corecta.</div>
+        </div>
+        <div class="faq-card">
+          <button class="faq-card__q" aria-expanded="false">Cand este cel mai bun moment sa cumpar?<span class="faq-card__icon">&#9660;</span></button>
+          <div class="faq-card__a">Black Friday, reducerile de vara si perioadele de lichidare de stoc ofera cele mai bune preturi. Preturile la masini de spalat variaza cu 15-25% in functie de perioada.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="cta-band">
+    <div class="wrap">
+      <div class="cta-inner">
+        <div class="cta-text">
+          <h2>Nu stii ce masina de spalat sa alegi?</h2>
+          <p>Am trecut prin 21 de modele si le-am comparat pe specificatii reale, nu pe marketing. Ieftine, de buget sau premium, gasesti recomandarea potrivita pentru bugetul tau.</p>
+        </div>
+        <div class="cta-actions">
+          <a href="#ieftine" class="cta-pick">
+            <div>
+              <span class="cta-pick__label">Buget mic</span>
+              <span class="cta-pick__hook">7 masini cu motor inverter si clasa A de la 1.000 RON</span>
+            </div>
+            <span class="cta-pick__range">1.000 - 1.500 RON &rarr;</span>
+          </a>
+          <a href="#buget" class="cta-pick">
+            <div>
+              <span class="cta-pick__label">Raport calitate-pret</span>
+              <span class="cta-pick__hook">Masini slim, cu uscator si SteamCure sub 2.500 RON</span>
+            </div>
+            <span class="cta-pick__range">1.500 - 2.500 RON &rarr;</span>
+          </a>
+          <a href="#premium" class="cta-pick cta-pick--accent">
+            <div>
+              <span class="cta-pick__label">Fara compromisuri</span>
+              <span class="cta-pick__hook">Miele, Bosch, Samsung AI si Roborock cu Wi-Fi si Auto Dose</span>
+            </div>
+            <span class="cta-pick__range">2.500+ RON &rarr;</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

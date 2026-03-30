@@ -1,0 +1,123 @@
+---
+import products from '../data/products.json';
+
+const siteUrl = 'https://masinadespalatieftina.ro';
+const now = new Date().toISOString();
+const all = [...(products.ieftine || []), ...(products.buget || []), ...(products.premium || [])];
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'masinadespalatieftina.ro',
+  url: siteUrl,
+  description: 'Cele mai bune masini de spalat ieftine – comparatii, analize si recomandari actualizate',
+  inLanguage: 'ro',
+};
+
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'masinadespalatieftina.ro',
+  url: siteUrl,
+  logo: `${siteUrl}/assets/images/logo.webp`,
+  description: 'Site independent de comparatii si recomandari de masini de spalat ieftine',
+  contactPoint: {
+    '@type': 'ContactPoint',
+    email: 'contact@masinadespalatieftina.ro',
+    contactType: 'customer service',
+    availableLanguage: 'Romanian',
+  },
+};
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: `Masina de spalat ieftina si buna 2026: ${all.length} modele comparate si testate`,
+  description: 'Ce masina de spalat sa cumpar in 2026? Am comparat 21 de masini de spalat rufe ieftine, de buget si premium. Arctic, Beko, Samsung, LG si Whirlpool cu motor inverter, clasa A si spalare cu aburi, de la 1.000 RON.',
+  image: `${siteUrl}/assets/images/og-cover.webp`,
+  datePublished: '2026-03-30T08:00:00+03:00',
+  dateModified: now,
+  url: siteUrl,
+  inLanguage: 'ro',
+  author: {
+    '@type': 'Person',
+    name: 'Echipa masinadespalatieftina.ro',
+    url: siteUrl,
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'masinadespalatieftina.ro',
+    url: siteUrl,
+    logo: { '@type': 'ImageObject', url: `${siteUrl}/favicon.svg` },
+  },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Acasa', item: siteUrl },
+    { '@type': 'ListItem', position: 2, name: 'Cele mai bune masini de spalat ieftine 2026', item: siteUrl },
+  ],
+};
+
+const itemListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Cele mai bune masini de spalat ieftine recomandate',
+  numberOfItems: all.length,
+  itemListElement: all.map((p, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: p.name,
+    url: `${siteUrl}/#recenzie-${p.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '')}`,
+  })),
+};
+
+const faqs = [
+  { q: 'Care este cea mai buna masina de spalat ieftina in 2026?', a: 'Depinde de buget si nevoi. Pentru majoritatea familiilor, o masina de spalat cu capacitate de 7-8 kg, clasa energetica A si 1200 rpm ofera cel mai bun raport calitate-pret.' },
+  { q: 'Cat consuma o masina de spalat?', a: 'O masina moderna cu clasa energetica A consuma intre 40-60 kWh pe an la utilizare normala. Diferenta fata de una veche poate fi de 100-200 RON pe an la factura de curent.' },
+  { q: 'Merita o masina de spalat cu uscator?', a: 'Daca ai spatiu limitat si nu ai unde usca rufele, da. Modelele 2-in-1 sunt mai scumpe dar economisesc spatiu. Uscarea consuma mai multa energie decat spalarea.' },
+  { q: 'Cat de importanta este viteza de centrifugare?', a: '1200 rpm este suficient pentru majoritatea hainelor. 1400 rpm scoate rufele mai uscate dar este mai zgomotos si consuma mai mult. Sub 1000 rpm nu recomandam.' },
+  { q: 'Ce capacitate am nevoie?', a: 'Pentru 1-2 persoane: 6-7 kg. Familie cu 2-3 copii: 8-9 kg. Familie mare sau lenjerii voluminoase: 10+ kg.' },
+  { q: 'Samsung, LG sau Beko – ce brand sa aleg?', a: 'Samsung si LG au cel mai bun service in Romania. Beko si Arctic ofera cel mai bun pret la specificatii similare. Toate sunt fiabile pentru utilizare normala.' },
+  { q: 'Cat dureaza o masina de spalat?', a: 'O masina de spalat de calitate medie dureaza 8-12 ani. Modelele premium pot tine 15+ ani cu intretinere corecta.' },
+  { q: 'Cand este cel mai bun moment sa cumpar?', a: 'Black Friday, reducerile de vara si perioadele de lichidare de stoc ofera cele mai bune preturi. Preturile la masini de spalat variaza cu 15-25% in functie de perioada.' },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(f => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
+const howToSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: 'Cum alegi cea mai buna masina de spalat ieftina in 2026',
+  description: 'Ghid complet in 9 pasi pentru a alege masina de spalat potrivita in functie de buget, capacitate, consum si functii.',
+  totalTime: 'PT15M',
+  step: [
+    { '@type': 'HowToStep', position: 1, name: 'Stabileste capacitatea necesara', text: 'Pentru 1-2 persoane alege 6-7 kg. Familie cu copii: 8-9 kg. Familie mare sau lenjerii voluminoase: 10+ kg. Nu lua masina prea mare daca speli putin.' },
+    { '@type': 'HowToStep', position: 2, name: 'Alege viteza de centrifugare', text: '1200 RPM este suficient pentru majoritatea. 1400 RPM scoate rufele mai uscate. Sub 1000 RPM nu recomandam.' },
+    { '@type': 'HowToStep', position: 3, name: 'Verifica clasa energetica', text: 'Clasa A este cea mai eficienta. Diferenta intre A si D este de 40-70 RON pe an la factura de curent. Pe 10 ani economisesti 400-700 RON.' },
+    { '@type': 'HowToStep', position: 4, name: 'Alege tipul de motor', text: 'Motor inverter este mai silentios, mai eficient si mai durabil decat motorul clasic cu perii. Diferenta de pret e de 100-200 RON.' },
+    { '@type': 'HowToStep', position: 5, name: 'Decide daca ai nevoie de uscator', text: 'Masina cu uscator economiseste spatiu dar consuma mai mult. Merita daca nu ai balcon sau loc de uscat rufele.' },
+    { '@type': 'HowToStep', position: 6, name: 'Verifica daca ai nevoie de format slim', text: 'Masina slim are 40-48 cm adancime. Perfecta pentru spatii mici dar capacitatea e cu 1-2 kg mai mica.' },
+    { '@type': 'HowToStep', position: 7, name: 'Verifica functia de spalare cu aburi', text: 'Aburul elimina 99.9% din bacterii si alergeni. Util pentru familii cu copii mici sau persoane cu alergii.' },
+    { '@type': 'HowToStep', position: 8, name: 'Alege brandul in functie de service', text: 'Samsung si LG au cel mai bun service in Romania. Beko si Arctic ofera cel mai bun pret. Bosch si Miele sunt premium.' },
+    { '@type': 'HowToStep', position: 9, name: 'Compara preturile intre magazine', text: 'Acelasi model poate varia cu 100-300 RON intre eMAG, Altex, Dedeman si Flanco. Cele mai bune preturi sunt la Black Friday si reducerile de vara.' },
+  ],
+};
+---
+<script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(itemListSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(howToSchema)} />
