@@ -1,0 +1,41 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import products from '../../data/masini.json';
+export function getStaticPaths({ paginate }) {
+  const items = products.filter((p) => p.kind === 'vase').sort((a, b) => a.price - b.price);
+  return paginate(items, { pageSize: 48 });
+}
+const { page } = Astro.props;
+const money = (n) => Number(n).toLocaleString('ro-RO', { minimumFractionDigits: 0, maximumFractionDigits: 0 }) + ' lei';
+const total = products.filter((p) => p.kind === 'vase').length;
+const pageMod = page.data.reduce((m, p) => (p.modified && p.modified > m ? p.modified : m), '2026-04-01');
+const title = page.currentPage === 1 ? `Mașini de spălat vase ieftine: ${total} modele și prețuri ${new Date().getFullYear()} | MasinaDeSpalatIeftina.ro` : `Mașini de spălat vase – pagina ${page.currentPage} | MasinaDeSpalatIeftina.ro`;
+const desc = `Toate Mașini de spălat vase ieftine din magazinele partenere: ${total} de modele sub 2000 lei, cu cele mai mici prețuri.`;
+---
+<Layout title={title} description={desc} modified={pageMod}>
+  <Nav />
+  <section class="rec-sec"><div class="wrap">
+    <nav class="rec-bc"><a href="/">Acasă</a> › <a href="/recomandari/">Mașini de spălat</a> › <span>Mașini de spălat vase</span></nav>
+    <div class="sec-head"><span class="sec-head__tag">Vase</span><h1>🍽️ Mașini de spălat vase ieftine</h1>
+      <p><strong>{total}</strong> de Mașini de spălat vase sub 2000 lei, cu prețuri actualizate periodic. Pagina {page.currentPage} din {page.lastPage}.</p></div>
+    <div class="products">{page.data.map((p) => (
+      <article class="card">
+        {p.oldPrice && <span class="card__badge card__badge--value">-{Math.round((1 - p.price / p.oldPrice) * 100)}%</span>}
+        <a class="card__img" href={`/masina/${p.slug}/`} aria-label={p.name}><img src={p.img} alt={p.name} width="200" height="200" loading="lazy" decoding="async" /></a>
+        <div class="card__body">
+          <a href={`/masina/${p.slug}/`}><h3 class="card__name">{p.name}</h3></a>
+          <div class="card__specs">{Object.values(p.specs).slice(1, 4).map((v) => <span class="card__spec">{v}</span>)}</div>
+          <div class="card__price-row"><span class="card__price">{money(p.price)}</span>{p.oldPrice && <s>{money(p.oldPrice)}</s>}</div>
+          <div class="card__foot"><a href={`/masina/${p.slug}/`} class="card__cta">Vezi detalii</a></div>
+        </div>
+      </article>))}</div>
+    <nav class="rec-pager" aria-label="Paginare">
+      {page.url.prev ? <a class="rec-pg" href={page.url.prev}>← Anterioarele</a> : <span class="rec-pg rec-pg--off">← Anterioarele</span>}
+      <span class="rec-pg-now">Pagina {page.currentPage} / {page.lastPage}</span>
+      {page.url.next ? <a class="rec-pg" href={page.url.next}>Următoarele →</a> : <span class="rec-pg rec-pg--off">Următoarele →</span>}</nav>
+    <p class="rec-back"><a href="/recomandari/">← Vezi toate mașinile de spălat</a></p>
+  </div></section>
+  <Footer />
+</Layout>

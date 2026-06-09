@@ -1,0 +1,23 @@
+import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+const SITE = 'https://masinadespalatieftina.ro';
+const PAGE = 48, MIN_BRAND = 4;
+const recs = existsSync(fileURLToPath(new URL('../src/data/masini.json', import.meta.url))) ? JSON.parse(readFileSync(fileURLToPath(new URL('../src/data/masini.json', import.meta.url)), 'utf-8')) : [];
+const FIXED = '2026-04-01';
+const maxMod = (a) => a.reduce((m, p) => (p.modified && p.modified > m ? p.modified : m), FIXED);
+const allMod = recs.length ? maxMod(recs) : FIXED;
+const xe = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+const urls = [];
+const add = (loc, pri = '0.6', lastmod = allMod, img = null) => urls.push(`  <url><loc>${SITE}${loc}</loc><lastmod>${lastmod}</lastmod><priority>${pri}</priority>${img ? `<image:image><image:loc>${xe(img)}</image:loc></image:image>` : ''}</url>`);
+const paginate = (path, items, pri) => { add(path, pri); const last = Math.ceil(items.length / PAGE); for (let i = 2; i <= last; i++) add(`${path}${i}/`, '0.4', maxMod(items)); };
+add('/', '1.0');
+paginate('/recomandari/', recs, '0.9');
+['/despre-noi/', '/contact/', '/disclaimer-afiliere/', '/politica-confidentialitate/', '/politica-cookies/', '/termeni-si-conditii/'].forEach((u) => add(u, '0.3', FIXED));
+for (const k of ['rufe', 'vase']) { const items = recs.filter((p) => p.kind === k); if (items.length) paginate(`/${k}/`, items, '0.8'); }
+const byB = {}; for (const p of recs) if (p.brandSlug) (byB[p.brandSlug] ||= []).push(p);
+for (const [b, items] of Object.entries(byB)) if (items.length >= MIN_BRAND) paginate(`/brand/${b}/`, items, '0.7');
+const byM = {}; for (const p of recs) for (const o of (p.offers || [])) (byM[o.merchantSlug] ||= new Set()).add(p);
+for (const [m, set] of Object.entries(byM)) if (set.size >= 4) paginate(`/magazin/${m}/`, [...set], '0.6');
+for (const p of recs) add(`/masina/${p.slug}/`, '0.6', p.modified || allMod, p.img);
+writeFileSync(fileURLToPath(new URL('../public/sitemap.xml', import.meta.url)), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n${urls.join('\n')}\n</urlset>\n`);
+console.log(`sitemap: ${urls.length} URLs`);

@@ -2,13 +2,12 @@
 interface Props {
   title: string;
   description: string;
+  modified?: string;
 }
-const { title, description } = Astro.props;
+const { title, description, modified } = Astro.props;
 const siteUrl = 'https://masinadespalatieftina.ro';
 const siteName = 'masinadespalatieftina.ro';
-const now = new Date();
-const isoNow = now.toISOString();
-const updated = now.toLocaleDateString('ro-RO', { day: 'numeric', month: 'long', year: 'numeric' });
+const isoNow = modified ? `${modified}T08:00:00+03:00` : null;
 ---
 <!DOCTYPE html>
 <html lang="ro">
@@ -22,7 +21,7 @@ const updated = now.toLocaleDateString('ro-RO', { day: 'numeric', month: 'long',
 
   <meta property="og:type" content="article" />
   <meta property="article:published_time" content="2026-03-30T08:00:00+03:00" />
-  <meta property="article:modified_time" content={isoNow} />
+  {isoNow && <meta property="article:modified_time" content={isoNow} />}
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
   <meta property="og:url" content={siteUrl + Astro.url.pathname} />
@@ -81,6 +80,7 @@ const updated = now.toLocaleDateString('ro-RO', { day: 'numeric', month: 'long',
       window.addEventListener('scroll',function(){b.classList.toggle('show',window.scrollY>600)});
       b.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});
     })();
+    document.addEventListener('click',function(e){var t=e.target,b=t.closest?t.closest('[data-o]'):null;if(b){e.preventDefault();try{window.open('/out/'+atob(b.getAttribute('data-o'))+'/','_blank','noopener');}catch(_){}}});
     document.querySelectorAll('.faq-card__q').forEach(function(q){
       q.addEventListener('click',function(){
         var item=this.parentElement;
