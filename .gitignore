@@ -12,3 +12,5 @@ public/_redirects
 
 # server-only operational script (CF Global Key — never commit to public repo)
 deploy.sh
+.env
+*.log
